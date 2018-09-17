@@ -2,7 +2,10 @@
   "name": "bet-gaming",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "dotenv-flow": "^0.1.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
