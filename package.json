@@ -1,17 +1,8 @@
 {
-  "name": "yobetit-test",
+  "name": "bet-gaming",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "history": "^4.7.2",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1",
-    "react-redux": "^5.0.7",
-    "react-router": "^4.3.1",
-    "react-router-redux": "^5.0.0-alpha.9",
-    "react-scripts": "1.1.5",
-    "redux": "^4.0.0"
-  },
+  "dependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -24,9 +15,17 @@
     }
   },
   "devDependencies": {
+    "history": "^4.7.2",
     "husky": "^1.0.0-rc.14",
     "prettier": "^1.14.2",
     "pretty-quick": "^1.6.0",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-redux": "^5.0.0-alpha.9",
+    "react-scripts": "1.1.5",
+    "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5"
   }
 }
