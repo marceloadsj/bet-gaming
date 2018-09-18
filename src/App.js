@@ -1,27 +1,21 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
+import { Route } from "react-router";
 import { ConnectedRouter } from "react-router-redux";
 import { hot } from "react-hot-loader";
 import store, { history } from "./store";
+import HomePage from "./domains/index/HomePage";
 
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <div className="App">
-            <header className="App-header">
-              <h1 className="App-title">Welcome to React</h1>
-            </header>
-            <p className="App-intro">
-              To get started, edit <code>src/App.js</code> and save to reload.
-            </p>
-          </div>
+          <Route exact path="/" component={HomePage} />
         </ConnectedRouter>
       </Provider>
     );
   }
 }
 
-export default App;
 export default hot(module)(App);
