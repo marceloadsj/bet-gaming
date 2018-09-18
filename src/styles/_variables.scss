@@ -9,7 +9,7 @@
 
 // $white:    #fff !default;
 // $gray-100: #f8f9fa !default;
-// $gray-200: #e9ecef !default;
+$gray-200: #e9ecef !default;
 // $gray-300: #dee2e6 !default;
 // $gray-400: #ced4da !default;
 // $gray-500: #adb5bd !default;
@@ -38,10 +38,10 @@
 
 // $blue:    #007bff !default;
 // $indigo:  #6610f2 !default;
-// $purple:  #6f42c1 !default;
+$purple: #971390;
 // $pink:    #e83e8c !default;
 // $red:     #dc3545 !default;
-// $orange:  #fd7e14 !default;
+$orange: #f99b55;
 // $yellow:  #ffc107 !default;
 // $green:   #28a745 !default;
 // $teal:    #20c997 !default;
@@ -68,8 +68,8 @@
 //   $colors
 // );
 
-// $primary:       $blue !default;
-// $secondary:     $gray-600 !default;
+$primary: $purple;
+$secondary: $orange;
 // $success:       $green !default;
 // $info:          $cyan !default;
 // $warning:       $yellow !default;
@@ -108,7 +108,7 @@
 // // Quickly modify global styling by enabling or disabling optional features.
 
 // $enable-caret:              true !default;
-// $enable-rounded:            true !default;
+$enable-rounded: false;
 // $enable-shadows:            false !default;
 // $enable-gradients:          false !default;
 // $enable-transitions:        true !default;
@@ -122,7 +122,7 @@
 // // variables. Mostly focused on spacing.
 // // You can add more entries to the $spacers map, should you need more variation.
 
-// $spacer: 1rem !default;
+$spacer: 1.5rem;
 // $spacers: () !default;
 // // stylelint-disable-next-line scss/dollar-variable-default
 // $spacers: map-merge(
@@ -216,7 +216,7 @@
 // $line-height-lg:              1.5 !default;
 // $line-height-sm:              1.5 !default;
 
-// $border-width:                1px !default;
+$border-width: 0px;
 // $border-color:                $gray-300 !default;
 
 // $border-radius:               .25rem !default;
@@ -409,7 +409,7 @@
 // $input-padding-x-lg:                    $input-btn-padding-x-lg !default;
 // $input-line-height-lg:                  $input-btn-line-height-lg !default;
 
-// $input-bg:                              $white !default;
+$input-bg: $gray-200;
 // $input-disabled-bg:                     $gray-200 !default;
 
 // $input-color:                           $gray-700 !default;
@@ -701,7 +701,7 @@
 // $card-border-radius:                $border-radius !default;
 // $card-border-color:                 rgba($black, .125) !default;
 // $card-inner-border-radius:          calc(#{$card-border-radius} - #{$card-border-width}) !default;
-// $card-cap-bg:                       rgba($black, .03) !default;
+$card-cap-bg: $primary;
 // $card-bg:                           $white !default;
 
 // $card-img-overlay-padding:          1.25rem !default;
