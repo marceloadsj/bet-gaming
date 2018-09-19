@@ -9,7 +9,7 @@ import reducers from "./reducers";
 const history = createHistory();
 const middleware = routerMiddleware(history);
 
-let enhancers = applyMiddleware(fetchMiddleware, middleware, reduxThunk);
+let enhancers = applyMiddleware(reduxThunk, fetchMiddleware, middleware);
 if (process.env.NODE_ENV === "development") {
   enhancers = composeWithDevTools(enhancers);
 }
