@@ -1,0 +1,46 @@
+@import "styles/variables";
+
+// Sadly the component is not writed in sass, only in css-in-js lib named emotion
+// I will use the approach below, important is needed cause emotion classes are appended in end of tree
+
+.general-select {
+  &__ {
+    &control {
+      background-color: $input-bg !important;
+      border-width: $border-width !important;
+      border-color: $input-focus-border-color;
+      border-radius: if($enable-rounded, $border-radius, 0px) !important;
+
+      &--is-focused {
+        @if $enable-shadows {
+          box-shadow: $input-box-shadow, $input-focus-box-shadow !important;
+        } @else {
+          box-shadow: $input-focus-box-shadow !important;
+        }
+      }
+
+      &--is-disabled {
+        background-color: $input-disabled-bg !important;
+      }
+    }
+
+    &menu {
+      box-shadow: $box-shadow !important;
+      border-radius: if($enable-rounded, $border-radius, 0px) !important;
+
+      &-list {
+        border-width: $border-width !important;
+      }
+    }
+
+    &option {
+      &--is-focused {
+        background-color: $secondary !important;
+      }
+
+      &--is-selected {
+        background-color: $primary !important;
+      }
+    }
+  }
+}
