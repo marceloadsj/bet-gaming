@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import UserNamingForm from "domains/user/NamingForm";
+import UserLogin from "domains/user/UserLogin";
 
 class HomePage extends Component {
   static propTypes = {
@@ -9,7 +9,7 @@ class HomePage extends Component {
   };
 
   render() {
-    if (!this.props.user.name) return <UserNamingForm />;
+    if (!this.props.user.name) return <UserLogin />;
 
     return <div />;
   }
