@@ -5,6 +5,10 @@ dotenvFlow.config();
 
 const app = express();
 
+// Here we configure cors, enabling * in development
+const cors = require("./back_src/configs/cors");
+cors(app);
+
 // If running on production, then, the spa is served by us
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("build"));
