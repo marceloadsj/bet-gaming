@@ -1,14 +1,25 @@
 const axios = require("axios");
-const URL_WS_ALL_COUNTRIES = require("../configs/constants")
-  .URL_WS_ALL_COUNTRIES;
+const ResponseService = require("../services/ResponseService");
+const CONSTANTS = require("../configs/constants");
 
 class CountryController {
-  async list(_, response) {
+  async getByName(request, response) {
     try {
-      const axiosResponse = await axios.get(URL_WS_ALL_COUNTRIES);
+      const axiosResponse = await axios.get(
+        CONSTANTS.URL_WS_COUNTRY_BY_NAME.replace(":name", request.params.name)
+      );
       response.json(axiosResponse.data);
     } catch (error) {
-      response.status(500).json(error);
+      ResponseService.sendError(response, error);
+    }
+  }
+
+  async getAll(_, response) {
+    try {
+      const axiosResponse = await axios.get(CONSTANTS.URL_WS_COUNTRY_ALL);
+      response.json(axiosResponse.data);
+    } catch (error) {
+      ResponseService.sendError(response, error);
     }
   }
 }
