@@ -11,10 +11,12 @@ export default () => next => async action => {
         url: (process.env.REACT_APP_BACKEND_URL || "") + action.url
       });
     } catch (error) {
-      next({ type: action.typeFailure, data: error });
+      next({ type: action.type + "_FAILURE", data: error });
+      if (action.reject) action.reject(error);
       return;
     }
 
-    next({ type: action.typeSuccess, data: response.data });
+    next({ type: action.type + "_SUCCESS", data: response.data });
+    if (action.resolve) action.resolve(response.data);
   }
 };
