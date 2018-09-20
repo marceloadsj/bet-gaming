@@ -15,7 +15,7 @@ I'm using the generated project to work on the two edges:
 
 ### Development
 
-- Start the servers using the **"npm start"** or **"yarn start"**:
+- Start the servers using the **"npm start-dev"** or **"yarn start-dev"**:
   -- front run into **[localhost:3000](http://localhost:3000)**;
   -- back run into **[localhost:4000](http://localhost:4000)**;
 
@@ -28,9 +28,10 @@ _The CRA project does not use CSS Modules or CSS-in-JS approach, only the .css i
 ### Build & Deploy
 
 When we build with "npm/yarn build" command, a build folder is generated.
-In production, we only use the ./back_src, ./build and ./server.js files (with .env and pkg.json).
+In production, we only use the ./back_src, ./build and ./server.js files (plus .env and pkg.json).
 
-(WIP) Configure the pipeline for CI/CD into Heroku!
+The integration has configured in heroku, and the link is:
+[https://bet-gaming.herokuapp.com](https://bet-gaming.herokuapp.com/)
 
 ### FRONT:
 
@@ -43,9 +44,12 @@ In production, we only use the ./back_src, ./build and ./server.js files (with .
   -- **styles** (general style .sass files);
   -- **configs** (common config to use across the system);
   -- **domains** (domain driven folder to create components);
+  -- **middlewares** (folder to store redux middlewares like fetch, logger, analytics);
 
 The Domain folder contains all components separated by application higher domains and/or features, and each domain can have:
 
+- **Selectors** (reselect files to write performatic memoized functions);
+- **Constants** (specific constants of domain);
 - **Components/Containers** (dumb and smart at same file, better to read/code);
 - **Styles** (specific styles with same name as component);
 - **Reducer and Actions** (single file action/reducer approach, better to code entire flow of redux without need to navigate);
@@ -57,8 +61,9 @@ The Domain folder contains all components separated by application higher domain
 - Prettier to code format too;
 - The back code is structured as:
   -- **server.js** (as entrypoint file);
+  -- **./back_src/configs** (simple and unique configurations folder);
   -- **./back_src/controllers** (controllers of a MVC structure as ES6 classes);
-  -- (WIP)
+  -- **./back_src/services** (layer to store ES6 classes with common/shared funcionalities);
 
 ### FRONT:
 
@@ -66,16 +71,15 @@ The Domain folder contains all components separated by application higher domain
 
 - Redux (State Management);
 - React Router (Routing System);
+- Reselect (Memoization);
 - Bootstrap 4 (With Sass);
 - Reactstrap (React Components for Bootstrap 4);
 - Font Awesome 5 (Icon Library);
-
-- (WIP) React Loadable (Bundle splitting);
-- (WIP) Axios (fetch library);
+- Axios (fetch library);
 
 ### BACK:
 
 ##### Some libraries used in project
 
 - Express (Web HTTP Framework);
-- (WIP)
+- Axios too;
