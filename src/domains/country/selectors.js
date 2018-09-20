@@ -1,9 +1,14 @@
 import { createSelector } from "reselect";
 
-export const countriesOptions = createSelector(
+export const countriesArray = createSelector(
   countries => countries,
+  countries => Object.values(countries)
+);
+
+export const countriesOptions = createSelector(
+  countries => countriesArray(countries),
   countries =>
-    Object.values(countries).map(country => {
+    countries.map(country => {
       return {
         icon: country.flag,
         value: country.alpha3Code,

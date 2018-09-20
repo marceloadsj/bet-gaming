@@ -1,13 +1,16 @@
-import fetchCountries from "./actions/fetchCountries";
 import fetchCountryByName from "./actions/fetchCountryByName";
+import fetchCountryByCode from "./actions/fetchCountryByCode";
+import fetchCountries from "./actions/fetchCountries";
 
-const reducers = [fetchCountries, fetchCountryByName];
+const reducers = [fetchCountryByName, fetchCountryByCode, fetchCountries];
 
 const initialState = {
-  fetchingCountries: false,
-  fetchCountriesError: null,
   fetchingCountryByName: false,
   fetchCountryByName: null,
+  fetchingCountryByCode: false,
+  fetchCountryByCodeError: null,
+  fetchingCountries: false,
+  fetchCountriesError: null,
   list: {}
 };
 
