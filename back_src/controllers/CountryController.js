@@ -18,6 +18,16 @@ class CountryController {
     try {
       const axiosResponse = await axios.get(CONSTANTS.URL_WS_COUNTRY_ALL);
       response.json(axiosResponse.data);
+  async getByCode(request, response) {
+    try {
+      const axiosResponse = await axios.get(
+        CONSTANTS.URL_WS_COUNTRY_BY_CODE.replace(":code", request.params.code)
+      );
+      ResponseService.sendJson(response, axiosResponse.data);
+    } catch (error) {
+      ResponseService.sendError(response, error);
+    }
+  }
     } catch (error) {
       ResponseService.sendError(response, error);
     }
