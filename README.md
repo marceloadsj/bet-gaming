@@ -13,6 +13,44 @@ I'm using the generated project to work on the two edges:
 
 ---
 
+### Questions
+
+1. Write a function that connects to https://restcountries.eu/ and gets a unique country from a
+   specific name given using the Node back end and send it to the front end.
+
+-- the backend function is **back_src/controllers/CountryController.getByName** and **getByCode**;
+-- I writed the flow from front (redux) to back (express);
+-- the redux flow files are in **src/domains/country/actions**: **fetchCountryByName** and **fetchCountryByCode**;
+-- it uses the fetchMiddleware to dispatch calls to backend;
+
+2. Using the same API ( https://restcountries.eu/ ), and from an array of string, write a function
+   that returns a list of countries where their name matches at least a part of one of these string
+   use the Node back end and send it to the front end.
+
+-- the backend function is **back_src/controllers/CountryController.getByNames**;
+-- it receive an array in url first;second;third, url: /api/countries/by-names/brazil;malta;
+-- in front it uses the same api in component **src/domains/country/CountrySelect**;
+-- in the country table, the same way of search, by ; character, are enabled;
+-- the country table search match against code, name, region and subregion;
+
+3. Using the same API ( https://restcountries.eu/ ) in the React front end list all the countries
+   and a field to filter the country by name.
+
+-- the backend function is **back_src/controllers/CountryController.getAllAndReturn**;
+-- the front flow starts in **src/domains/country/CountryTable**;
+-- the front filter does not dispatch a server call;
+
+4. Using the Slot Machine data, create a function that, when it’s called by the front end, gives back the
+   result of a spin and show the result.
+
+-- the slot machine component is **src/domains/game/SlotMachineCard**;
+-- the three reels are **src/domains/game/SlotMachineReel**;
+-- some logic is in Card, some in Reel;
+-- all the feature of slot machine are front only, because there are no persistence in backend;
+-- **(WIP) extract the logic to a pure .js file to write some tests with jest**;
+
+---
+
 ### Development
 
 - Start the servers using the **"npm start-dev"** or **"yarn start-dev"**:
@@ -25,6 +63,8 @@ The sass layer is builded using node-sass-chokidar, and all .sass files turns in
 
 _The CRA project does not use CSS Modules or CSS-in-JS approach, only the .css import into .js files facility._
 
+---
+
 ### Build & Deploy
 
 When we build with "npm/yarn build" command, a build folder is generated.
@@ -32,6 +72,8 @@ In production, we only use the ./back_src, ./build and ./server.js files (plus .
 
 The integration has configured in heroku, and the link is:
 [https://bet-gaming.herokuapp.com](https://bet-gaming.herokuapp.com/)
+
+---
 
 ### FRONT:
 
@@ -64,6 +106,8 @@ The Domain folder contains all components separated by application higher domain
   -- **./back_src/configs** (simple and unique configurations folder);
   -- **./back_src/controllers** (controllers of a MVC structure as ES6 classes);
   -- **./back_src/services** (layer to store ES6 classes with common/shared funcionalities);
+
+---
 
 ### FRONT:
 
