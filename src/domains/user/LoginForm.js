@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from "react";
-// import PropTypes from "prop-types";
-// import { bindActionCreators } from "redux";
+import React, { PureComponent, Fragment } from "react";
+import PropTypes from "prop-types";
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import {
   Form,
@@ -10,11 +10,19 @@ import {
   Button,
   UncontrolledTooltip
 } from "reactstrap";
-import "./UserLogin.css";
+import { push } from "connected-react-router";
+import classnames from "classnames";
 import Icon from "domains/general/Icon";
 import CountrySelect from "domains/country/CountrySelect";
+import MultiSearchTooltip from "domains/general/MultiSearchTooltip";
+import { createUser } from "./actions/createUser";
 
-class LoginForm extends Component {
+class LoginForm extends PureComponent {
+  static propTypes = {
+    createUser: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired
+  };
+
   state = {
     name: "",
     country: "",
@@ -24,34 +32,53 @@ class LoginForm extends Component {
 
   onInputChange = event => this.setState({ name: event.target.value });
 
-  onSelectChange = country => this.setState({ country });
+  onSelectChange = ({ value }) => this.setState({ country: value });
 
-  onSelectInputChange = () =>
+  onSelectInputChange = () => {
     this.setState({ selectTouched: true, selectErrored: false });
+  };
 
   onSelectError = () => this.setState({ selectErrored: true });
 
+  onLoginClick = event => {
+    event.stopPropagation();
+
+    this.props.createUser({
+      name: this.state.name,
+      country: this.state.country
+    });
+
+    this.props.push("/");
+  };
+
   renderButton() {
     const disabled = !this.state.name || !this.state.country;
-
-    let tooltip;
-    if (disabled) {
-      tooltip = (
-        <UncontrolledTooltip placement="top" target="userUserLoginButton">
-          Please, fill the form before enter!
-        </UncontrolledTooltip>
-      );
-    }
+    const tooltip = disabled ? (
+      "Please, fill the form before enter!"
+    ) : (
+      <Fragment>
+        Let's get it on, <br />
+        {this.state.name}!
+      </Fragment>
+    );
 
     return (
       <Fragment>
-        <div id="userUserLoginButton">
-          <Button color="secondary" block className="mt-4" disabled={disabled}>
+        <div id="userLoginButton">
+          <Button
+            color="secondary"
+            block
+            className={classnames("mt-4", { "pointer-events-none": disabled })}
+            disabled={disabled}
+            onClick={this.onLoginClick}
+          >
             Enter to {process.env.REACT_APP_NAME} <Icon icon="sign-in-alt" />
           </Button>
         </div>
 
-        {tooltip}
+        <UncontrolledTooltip placement="bottom" target="userLoginButton">
+          {tooltip}
+        </UncontrolledTooltip>
       </Fragment>
     );
   }
@@ -68,7 +95,9 @@ class LoginForm extends Component {
 
     return (
       <FormGroup className="mt-3">
-        <Label>Your Country {error}</Label>
+        <Label className={error && "text-danger"}>
+          Your Country <MultiSearchTooltip /> {error}
+        </Label>
 
         <CountrySelect
           onChange={this.onSelectChange}
@@ -82,12 +111,12 @@ class LoginForm extends Component {
   render() {
     return (
       <Form>
-        <FormGroup className="mt-3">
-          <Label for="userUserLoginName">Your Name</Label>
+        <FormGroup>
+          <Label for="userLoginName">Your Name</Label>
 
           <Input
             name="name"
-            id="userUserLoginName"
+            id="userLoginName"
             placeholder="Type here..."
             onChange={this.onInputChange}
           />
@@ -101,15 +130,11 @@ class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {};
+const mapDispatchToProps = dispatch => {
+  return bindActionCreators({ createUser, push }, dispatch);
 };
 
-// const mapDispatchToProps = dispatch => {
-//   return bindActionCreators({}, dispatch);
-// };
-
 export default connect(
-  mapStateToProps
-  //   mapDispatchToProps
+  null,
+  mapDispatchToProps
 )(LoginForm);
