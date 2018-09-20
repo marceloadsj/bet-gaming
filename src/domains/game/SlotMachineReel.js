@@ -68,8 +68,9 @@ class SlotMachineReel extends Component {
 
     return (
       <div
-        className={classnames("text-center px-2 py-3", {
-          "bg-light": position !== 0
+        className={classnames("text-center px-2 py-3 d-sm-block", {
+          "bg-light": position !== 0,
+          "d-none": position !== 0
         })}
       >
         <img
@@ -87,7 +88,7 @@ class SlotMachineReel extends Component {
 
   render() {
     return (
-      <Card className="shadow-lg">
+      <Card className="shadow-lg mb-1">
         <CardBody className="p-0">
           {this.renderImage(-1)}
           {this.renderImage()}
