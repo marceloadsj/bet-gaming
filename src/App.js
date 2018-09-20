@@ -1,17 +1,26 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import { Provider } from "react-redux";
-import { Route } from "react-router";
-import { ConnectedRouter } from "react-router-redux";
+import { Switch, Route } from "react-router-dom";
+import { ConnectedRouter } from "connected-react-router";
 import { hot } from "react-hot-loader";
-import store, { history } from "./store";
+import { Container } from "reactstrap";
+import store, { history } from "./configs/store";
+import "./App.css";
 import HomePage from "./domains/index/HomePage";
+import LoginPage from "./domains/user/LoginPage";
+import NotFoundPage from "./domains/index/NotFoundPage";
 
-class App extends Component {
+class App extends PureComponent {
   render() {
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
-          <Route exact path="/" component={HomePage} />
+          <Container fluid className="app p-3">
+            <Switch>
+              <Route exact path="/login" component={LoginPage} />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </Container>
         </ConnectedRouter>
       </Provider>
     );
