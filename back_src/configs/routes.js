@@ -1,6 +1,6 @@
 const express = require("express");
 const countryController = require("../controllers/CountryController");
-const indexController = require("../controllers/indexController");
+const indexController = require("../controllers/IndexController");
 
 module.exports = app => {
   app.get("/api/countries", countryController.getAllAndReturn);
