@@ -18,6 +18,7 @@ class App extends PureComponent {
           <Container fluid className="app p-3">
             <Switch>
               <Route exact path="/login" component={LoginPage} />
+              <Route exact path="/(|slot-machine)" component={HomePage} />
               <Route component={NotFoundPage} />
             </Switch>
           </Container>

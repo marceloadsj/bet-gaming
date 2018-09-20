@@ -15,6 +15,7 @@ import {
 import { Link } from "react-router-dom";
 import UserCard from "domains/user/UserCard";
 import CountriesCard from "domains/country/CountriesCard";
+import SlotMachineCard from "domains/game/SlotMachineCard";
 import Icon from "domains/general/Icon";
 import "./HomePage.css";
 
@@ -58,6 +59,7 @@ class HomePage extends Component {
 
           <Switch>
             <Route exact path="/" component={CountriesCard} />
+            <Route exact path="/slot-machine" component={SlotMachineCard} />
           </Switch>
         </Col>
 
