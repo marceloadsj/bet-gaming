@@ -1,6 +1,7 @@
-import addUserNameReducer from "./actions/addUserName";
+import createUser from "./actions/createUser";
+import removeUser from "./actions/removeUser";
 
-const reducers = [addUserNameReducer];
+const reducers = [createUser, removeUser];
 
 const initialState = {};
 
