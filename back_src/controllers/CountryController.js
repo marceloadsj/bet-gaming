@@ -1,5 +1,6 @@
 const axios = require("axios");
 const ResponseService = require("../services/ResponseService");
+const CountryService = require("../services/CountryService");
 const CONSTANTS = require("../configs/constants");
 
 class CountryController {
@@ -8,16 +9,32 @@ class CountryController {
       const axiosResponse = await axios.get(
         CONSTANTS.URL_WS_COUNTRY_BY_NAME.replace(":name", request.params.name)
       );
-      response.json(axiosResponse.data);
+      ResponseService.sendJson(response, axiosResponse.data);
     } catch (error) {
       ResponseService.sendError(response, error);
     }
   }
 
-  async getAll(_, response) {
+  async getByNames(request, response) {
     try {
-      const axiosResponse = await axios.get(CONSTANTS.URL_WS_COUNTRY_ALL);
-      response.json(axiosResponse.data);
+      const axiosResponse = await CountryService.getAll();
+
+      const names = request.params.names
+        .toLowerCase()
+        .split(";")
+        .map(name => name.trim())
+        .filter(name => name);
+
+      const data = axiosResponse.data.filter(country => {
+        return names.some(name => country.name.toLowerCase().includes(name));
+      });
+
+      ResponseService.sendJson(response, data);
+    } catch (error) {
+      ResponseService.sendError(response, error);
+    }
+  }
+
   async getByCode(request, response) {
     try {
       const axiosResponse = await axios.get(
@@ -28,6 +45,11 @@ class CountryController {
       ResponseService.sendError(response, error);
     }
   }
+
+  async getAllAndReturn(_, response) {
+    try {
+      const axiosResponse = await CountryService.getAll();
+      ResponseService.sendJson(response, axiosResponse.data);
     } catch (error) {
       ResponseService.sendError(response, error);
     }

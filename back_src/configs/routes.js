@@ -2,10 +2,10 @@ const countryController = require("../controllers/CountryController");
 const indexController = require("../controllers/indexController");
 
 module.exports = app => {
-  app.get("/api/country/by-name/:name", countryController.getByName);
-  app.get("/api/country/by-names/:names", countryController.getByNames);
-  app.get("/api/country/by-code/:code", countryController.getByCode);
   app.get("/api/countries", countryController.getAllAndReturn);
+  app.get("/api/countries/by-name/:name", countryController.getByName);
+  app.get("/api/countries/by-names/:names", countryController.getByNames);
+  app.get("/api/country/by-code/:code", countryController.getByCode);
 
   app.get("/api", indexController.apiIndex);
   app.get("/api/*", indexController.notFoundApi);
