@@ -9,10 +9,11 @@
     "express": "^4.16.3"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development npm-run-all -p start-front watch-css start-back",
+    "start": "cross-env NODE_ENV=production node server.js",
+    "postinstall": "npm run build",
+    "start-dev": "cross-env NODE_ENV=development npm-run-all -p start-front watch-css start-back",
     "start-front": "react-scripts start",
     "start-back": "nodemon server.js",
-    "start-prod": "cross-env NODE_ENV=production node server.js",
     "build": "npm-run-all build-css build-front",
     "build-front": "react-scripts build",
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
