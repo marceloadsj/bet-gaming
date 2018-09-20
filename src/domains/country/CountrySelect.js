@@ -1,40 +1,47 @@
-import React, { Component, Fragment } from "react";
+import React, { PureComponent, Fragment } from "react";
 import PropTypes from "prop-types";
 import omit from "omit";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { components } from "react-select";
+import debounce from "debounce";
 import Select from "domains/general/Select";
 import { countriesOptions } from "domains/country/selectors";
 import { fetchCountryByName } from "domains/country/actions/fetchCountryByName";
+import Svg from "domains/general/Svg";
 
 const ReactSelectOption = components.Option;
 const ReactSelectSingleValue = components.SingleValue;
 
-class CountrySelect extends Component {
+class CountrySelect extends PureComponent {
   static propTypes = {
     fetchCountryByName: PropTypes.func.isRequired,
     onError: PropTypes.func,
     options: PropTypes.array.isRequired
   };
 
-  loadOptions = async (inputValue, callback) => {
+  fetchCountryByName = debounce(async (name, callback) => {
     let data;
     try {
-      data = await this.props.fetchCountryByName(inputValue);
+      data = await this.props.fetchCountryByName(name);
     } catch (error) {
       if (this.props.onError) this.props.onError(error);
       return;
     }
 
     callback(countriesOptions(data));
+  }, 300);
+
+  loadOptions = (inputValue, callback) => {
+    if (!inputValue) return new Promise.resolve(this.props.options);
+    this.fetchCountryByName(inputValue, callback);
   };
 
-  renderData(props) {
+  renderData({ data: { icon, label, value } }) {
     return (
       <Fragment>
-        <img src={props.data.icon} alt={props.data.label} width="20" />{" "}
-        <span className="small">{props.data.value}</span> - {props.data.label}
+        <Svg svg={icon} name={value} /> <span className="small">{value}</span> -{" "}
+        {label}
       </Fragment>
     );
   }
