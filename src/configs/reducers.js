@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
-import { routerReducer } from "react-router-redux";
-import userReducer from "./domains/user/reducer";
-import countryReducer from "./domains/country/reducer";
+import userReducer from "domains/user/reducer";
+import countryReducer from "domains/country/reducer";
 
 /*
 
@@ -26,15 +25,12 @@ An example of hidrated state:
         name: 'Malta'
       }
     }
-  },
-
-  router: ...
+  }
 }
 
 */
 
 export default combineReducers({
   user: userReducer,
-  country: countryReducer,
-  router: routerReducer
+  country: countryReducer
 });
