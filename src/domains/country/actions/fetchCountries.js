@@ -30,10 +30,16 @@ export default (state, action) => {
         ...state,
         fetchingCountries: false,
         fetchCountriesError: null,
-        list: action.data.reduce((countries, country) => {
-          countries[country.alpha3Code] = country;
-          return countries;
-        }, {})
+        list: {
+          ...state.list,
+          ...action.data.reduce((countries, country) => {
+            countries[country.alpha3Code] = {
+              ...state.list[country.alpha3Code],
+              ...country
+            };
+            return countries;
+          }, {})
+        }
       };
 
     case COUNTRY_FETCH_COUNTRIES + "_FAILURE":

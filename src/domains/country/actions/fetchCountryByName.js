@@ -1,14 +1,21 @@
-import { URL_COUNTRY_BY_NAME } from "configs/constants";
+import { URL_COUNTRY_BY_NAME, URL_COUNTRY_BY_NAMES } from "configs/constants";
 
 export const COUNTRY_FETCH_COUNTRY_BY_NAME = "COUNTRY_FETCH_COUNTRY_BY_NAME";
 
 export function fetchCountryByName(name) {
+  let url;
+  if (name.includes(";")) {
+    url = URL_COUNTRY_BY_NAMES.replace(":names", name);
+  } else {
+    url = URL_COUNTRY_BY_NAME.replace(":name", name);
+  }
+
   return dispatch => {
     return new Promise((resolve, reject) => {
       dispatch({
         type: COUNTRY_FETCH_COUNTRY_BY_NAME,
         fetchMiddleware: true,
-        url: URL_COUNTRY_BY_NAME.replace(":name", name),
+        url,
         resolve,
         reject
       });
