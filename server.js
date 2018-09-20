@@ -9,5 +9,5 @@ const app = express();
 cors(app);
 routes(app);
 
-const port = process.env.BACKEND_PORT;
+const port = process.env.PORT || process.env.BACKEND_PORT;
 app.listen(port, () => console.log(`Server is listening on port ${port}!`));
