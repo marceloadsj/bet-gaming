@@ -1,4 +1,4 @@
-# Bet Gaming (WIP)
+# Bet Gaming
 
 ### Description
 
@@ -48,7 +48,7 @@ I'm using the generated project to work on the two edges:
 -- the three reels are **[src/domains/game/SlotMachineReel](https://github.com/mjr-repos/bet-gaming/blob/master/src/domains/game/SlotMachineReel.js)**;
 -- some logic is in Card, some in Reel;
 -- all the feature of slot machine are front only, because there are no persistence in backend;
--- **(WIP) extract the logic to a pure .js file to write some tests with jest**;
+-- the functions of slot machine rules are all tested;
 
 SQL questons:
 
@@ -65,7 +65,7 @@ SQL questons:
 
 ---
 
-### Development
+### Development & Testing
 
 - Start the servers using the **"npm start-dev"** or **"yarn start-dev"**:
   -- front run into **[localhost:3000](http://localhost:3000)**;
@@ -74,6 +74,8 @@ SQL questons:
 In development, I use npm-run-all to start both servers (a back/express server and a front/webpack-dev-server from CRA).
 
 The sass layer is builded using node-sass-chokidar, and all .sass files turns into .css files that can be imported into components.
+
+-- There are some tests of module SlotMachineRules, to run all tests simply use the **npm test** or **yarn test** command;
 
 _The CRA project does not use CSS Modules or CSS-in-JS approach, only the .css import into .js files facility._
 
@@ -101,6 +103,7 @@ The integration has configured in heroku, and the link is:
   -- **configs** (common config to use across the system);
   -- **domains** (domain driven folder to create components);
   -- **middlewares** (folder to store redux middlewares like fetch, logger, analytics);
+  -- **modules** (vanilla modules, pure js, to use freely in components, backend, and easy testable);
 
 The Domain folder contains all components separated by application higher domains and/or features, and each domain can have:
 
