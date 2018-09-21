@@ -2,6 +2,7 @@
 
 ### Description
 
+_Fictive project created for testing purposes only!_
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 I choose CRA because it's a consolidated boilerplate with a lot of ready made configs and optimizations for webpack, babel, the development and the build process at all.
@@ -18,36 +19,49 @@ I'm using the generated project to work on the two edges:
 1. Write a function that connects to https://restcountries.eu/ and gets a unique country from a
    specific name given using the Node back end and send it to the front end.
 
--- the backend function is **back_src/controllers/CountryController.getByName** and **getByCode**;
+-- the backend function is **[back_src/controllers/CountryController.getByName](https://github.com/mjr-repos/bet-gaming/blob/master/back_src/controllers/CountryController.js#L7)** and **getByCode**;
 -- I writed the flow from front (redux) to back (express);
--- the redux flow files are in **src/domains/country/actions**: **fetchCountryByName** and **fetchCountryByCode**;
+-- the redux flow files are in **[src/domains/country/actions](https://github.com/mjr-repos/bet-gaming/blob/master/src/domains/country/actions)**: **fetchCountryByName** and **fetchCountryByCode**;
 -- it uses the fetchMiddleware to dispatch calls to backend;
 
-2. Using the same API ( https://restcountries.eu/ ), and from an array of string, write a function
+2. Using the same API [https://restcountries.eu](https://restcountries.eu), and from an array of string, write a function
    that returns a list of countries where their name matches at least a part of one of these string
    use the Node back end and send it to the front end.
 
--- the backend function is **back_src/controllers/CountryController.getByNames**;
+-- the backend function is **[back_src/controllers/CountryController.getByNames](https://github.com/mjr-repos/bet-gaming/blob/master/back_src/controllers/CountryController.js#L18)**;
 -- it receive an array in url first;second;third, url: /api/countries/by-names/brazil;malta;
--- in front it uses the same api in component **src/domains/country/CountrySelect**;
+-- in front it uses the same api in component **[src/domains/country/CountrySelect](https://github.com/mjr-repos/bet-gaming/blob/master/src/domains/country/CountrySelect.js)**;
 -- in the country table, the same way of search, by ; character, are enabled;
 -- the country table search match against code, name, region and subregion;
 
-3. Using the same API ( https://restcountries.eu/ ) in the React front end list all the countries
+3. Using the same API [https://restcountries.eu](https://restcountries.eu) in the React front end list all the countries
    and a field to filter the country by name.
 
--- the backend function is **back_src/controllers/CountryController.getAllAndReturn**;
--- the front flow starts in **src/domains/country/CountryTable**;
+-- the backend function is **[back_src/controllers/CountryController.getAllAndReturn](https://github.com/mjr-repos/bet-gaming/blob/master/back_src/controllers/CountryController.js#L49)**;
+-- the front flow starts in **[src/domains/country/CountriesTable](https://github.com/mjr-repos/bet-gaming/blob/master/src/domains/country/CountriesTable.js)**;
 -- the front filter does not dispatch a server call;
 
 4. Using the Slot Machine data, create a function that, when it’s called by the front end, gives back the
    result of a spin and show the result.
 
--- the slot machine component is **src/domains/game/SlotMachineCard**;
--- the three reels are **src/domains/game/SlotMachineReel**;
+-- the slot machine component is **[src/domains/game/SlotMachineCard](https://github.com/mjr-repos/bet-gaming/blob/master/src/domains/game/SlotMachineCard.js)**;
+-- the three reels are **[src/domains/game/SlotMachineReel](https://github.com/mjr-repos/bet-gaming/blob/master/src/domains/game/SlotMachineReel.js)**;
 -- some logic is in Card, some in Reel;
 -- all the feature of slot machine are front only, because there are no persistence in backend;
 -- **(WIP) extract the logic to a pure .js file to write some tests with jest**;
+
+SQL questons:
+
+1. Send the image of the schema and also the sql to create the database and tables.
+
+![Database Schema](databaseSchema.png)
+
+-- the detailed schema shared in a Google Sheet: [https://docs.google.com/spreadsheets/d/1nZC-hvMTx2gXVU9dggUY1z40ilIPhALIQ-ocA9TWe-0/edit?usp=sharing](https://docs.google.com/spreadsheets/d/1nZC-hvMTx2gXVU9dggUY1z40ilIPhALIQ-ocA9TWe-0/edit?usp=sharing)
+-- the creation sql is **[back_src/database/createQuery.sql](https://github.com/mjr-repos/bet-gaming/blob/master/back_src/database/createQuery.sql)**;
+
+2. Write based on above, a SQL query to get all players that have games of type "SLOT" as their favorite games.
+
+-- the query file is **[back_src/database/selectQuery.sql](https://github.com/mjr-repos/bet-gaming/blob/master/back_src/database/selectQuery.sql)**;
 
 ---
 
