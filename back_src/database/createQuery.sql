@@ -1,8 +1,11 @@
+PRAGMA foreign_keys = off;
+BEGIN TRANSACTION;
+
 CREATE TABLE IF NOT EXISTS casinos (
   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
   name VARCHAR (100) NOT NULL,
   code VARCHAR (10) UNIQUE NOT NULL,
-  active BOOLEAN NOT NULL DEFAULT true,
+  active BOOLEAN NOT NULL DEFAULT (1),
   created DATE NOT NULL,
   updated DATE NOT NULL,
   deleted DATE DEFAULT NULL
@@ -12,8 +15,8 @@ CREATE TABLE IF NOT EXISTS games (
   id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE,
   name VARCHAR (100) NOT NULL,
   code VARCHAR (10) UNIQUE NOT NULL,
-  type INTEGER NOT NULL,
-  active BOOLEAN NOT NULL DEFAULT true,
+  type VARCHAR (10) NOT NULL,
+  active BOOLEAN NOT NULL DEFAULT (1),
   created DATE NOT NULL,
   updated DATE NOT NULL,
   deleted DATE DEFAULT NULL
@@ -65,3 +68,20 @@ CREATE TABLE IF NOT EXISTS player_favorite_games (
   updated DATE NOT NULL,
   deleted DATE DEFAULT NULL
 );
+
+CREATE INDEX IF NOT EXISTS casinos_id_index ON casinos (id ASC);
+
+CREATE INDEX IF NOT EXISTS games_id_index ON games (id ASC);
+
+CREATE INDEX IF NOT EXISTS countries_id_index ON countries (id ASC);
+
+CREATE INDEX IF NOT EXISTS players_id_index ON players (id ASC);
+
+CREATE INDEX IF NOT EXISTS casino_games_id_index ON casino_games (id ASC);
+
+CREATE INDEX IF NOT EXISTS country_games_id_index ON country_games (id ASC);
+
+CREATE INDEX IF NOT EXISTS player_favorite_games_id_index ON player_favorite_games (id ASC);
+
+COMMIT TRANSACTION;
+PRAGMA foreign_keys = on;
