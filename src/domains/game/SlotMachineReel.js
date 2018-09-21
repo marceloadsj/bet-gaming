@@ -6,8 +6,13 @@ import apple from "images/apple.svg";
 import cherry from "images/cherry.svg";
 import banana from "images/banana.svg";
 import lemon from "images/lemon.svg";
-import { APPLE, BANANA, CHERRY, LEMON } from "./constants";
 import Loader from "domains/general/Loader";
+import SlotMachineRules from "modules/SlotMachineRules";
+
+const CHERRY = SlotMachineRules.CHERRY;
+const APPLE = SlotMachineRules.APPLE;
+const BANANA = SlotMachineRules.BANANA;
+const LEMON = SlotMachineRules.LEMON;
 
 class SlotMachineReel extends Component {
   static propTypes = {

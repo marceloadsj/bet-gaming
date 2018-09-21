@@ -14,37 +14,12 @@ import {
 } from "reactstrap";
 import Icon from "domains/general/Icon";
 import SlotMachineReel from "./SlotMachineReel";
-import {
-  APPLE,
-  BANANA,
-  CHERRY,
-  LEMON,
-  FIRST_REEL_DATA,
-  SECOND_REEL_DATA,
-  THIRD_REEL_DATA,
-  THREE_CHERRIES_PRIZE,
-  TWO_CHERRIES_PRIZE,
-  THREE_APPLES_PRIZE,
-  TWO_APPLES_PRIZE,
-  THREE_BANANAS_PRIZE,
-  TWO_BANANAS_PRIZE,
-  THREE_LEMONS_PRIZE,
-  SPIN_SEED
-} from "./constants";
+import { REELS_DATA } from "./constants";
 import { spendUserCoin } from "domains/user/actions/spendUserCoin";
 import { addUserCoins } from "domains/user/actions/addUserCoins";
+import SlotMachineRules from "modules/SlotMachineRules";
 
-const reelsData = [FIRST_REEL_DATA, SECOND_REEL_DATA, THIRD_REEL_DATA];
-
-const getRandomReelDataIndexes = datas => {
-  return datas.map(data => Math.floor(Math.random() * data.length));
-};
-
-const getRandomSpins = datas => {
-  return datas.map(
-    data => data.length + Math.floor(Math.random() * (data.length * SPIN_SEED))
-  );
-};
+const slotMachineRules = new SlotMachineRules(REELS_DATA);
 
 class SlotMachineCard extends PureComponent {
   static propTypes = {
@@ -57,37 +32,11 @@ class SlotMachineCard extends PureComponent {
     spinPrize: null,
     running: false,
     spins: [0, 0, 0],
-    reelIndexes: getRandomReelDataIndexes(reelsData)
+    reelIndexes: slotMachineRules.getRandomReelDataIndexes()
   };
 
-  checkThreeInARow(match) {
-    return reelsData.every(
-      (data, index) => data[this.state.reelIndexes[index]] === match
-    );
-  }
-
-  checkTwoInARow(match) {
-    return (
-      reelsData.filter((data, index) => {
-        return data[this.state.reelIndexes[index]] === match;
-      }).length === 2
-    );
-  }
-
-  getSpinPrize() {
-    if (this.checkThreeInARow(CHERRY)) return THREE_CHERRIES_PRIZE;
-    if (this.checkThreeInARow(APPLE)) return THREE_APPLES_PRIZE;
-    if (this.checkThreeInARow(BANANA)) return THREE_BANANAS_PRIZE;
-    if (this.checkThreeInARow(LEMON)) return THREE_LEMONS_PRIZE;
-    if (this.checkTwoInARow(CHERRY)) return TWO_CHERRIES_PRIZE;
-    if (this.checkTwoInARow(APPLE)) return TWO_APPLES_PRIZE;
-    if (this.checkTwoInARow(BANANA)) return TWO_BANANAS_PRIZE;
-
-    return false;
-  }
-
   spinPrizeCalculate() {
-    const spinPrize = this.getSpinPrize();
+    const spinPrize = slotMachineRules.getSpinPrize(this.state.reelIndexes);
 
     if (spinPrize) this.props.addUserCoins(spinPrize);
     this.setState({ spinPrize, running: false });
@@ -100,10 +49,11 @@ class SlotMachineCard extends PureComponent {
     spins.forEach((spin, index) => {
       if (spin > 0) {
         --spins[index];
-        --reelIndexes[index];
-        if (reelIndexes[index] === -1) {
-          reelIndexes[index] = reelsData[index].length - 1;
-        }
+
+        reelIndexes[index] = slotMachineRules.lowerReelIndex(
+          reelIndexes,
+          index
+        );
       }
     });
 
@@ -118,11 +68,15 @@ class SlotMachineCard extends PureComponent {
     });
   };
 
-  onClick = () => {
+  onPlayClick = () => {
     this.props.spendUserCoin();
 
     this.setState(
-      { running: true, spinPrize: null, spins: getRandomSpins(reelsData) },
+      {
+        running: true,
+        spinPrize: null,
+        spins: slotMachineRules.getRandomSpins()
+      },
       this.spinReelCalculate
     );
   };
@@ -157,7 +111,7 @@ class SlotMachineCard extends PureComponent {
     if (this.props.coins === 0 || this.state.running) return null;
 
     return (
-      <Button size="lg" onClick={this.onClick}>
+      <Button size="lg" onClick={this.onPlayClick}>
         Push to Play <Icon icon="play" />
       </Button>
     );
@@ -169,21 +123,21 @@ class SlotMachineCard extends PureComponent {
         <Row className="mb-3">
           <Col>
             <SlotMachineReel
-              data={FIRST_REEL_DATA}
+              data={REELS_DATA[0]}
               index={this.state.reelIndexes[0]}
             />
           </Col>
 
           <Col>
             <SlotMachineReel
-              data={SECOND_REEL_DATA}
+              data={REELS_DATA[1]}
               index={this.state.reelIndexes[1]}
             />
           </Col>
 
           <Col>
             <SlotMachineReel
-              data={THIRD_REEL_DATA}
+              data={REELS_DATA[2]}
               index={this.state.reelIndexes[2]}
             />
           </Col>

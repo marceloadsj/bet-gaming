@@ -1,19 +1,11 @@
-export const CHERRY = "CHERRY";
-export const LEMON = "LEMON";
-export const APPLE = "APPLE";
-export const BANANA = "BANANA";
+import SlotMachineRules from "modules/SlotMachineRules";
 
-export const SPIN_SEED = 3;
+const CHERRY = SlotMachineRules.CHERRY;
+const APPLE = SlotMachineRules.APPLE;
+const BANANA = SlotMachineRules.BANANA;
+const LEMON = SlotMachineRules.LEMON;
 
-export const THREE_CHERRIES_PRIZE = 50;
-export const TWO_CHERRIES_PRIZE = 40;
-export const THREE_APPLES_PRIZE = 20;
-export const TWO_APPLES_PRIZE = 10;
-export const THREE_BANANAS_PRIZE = 15;
-export const TWO_BANANAS_PRIZE = 5;
-export const THREE_LEMONS_PRIZE = 3;
-
-export const FIRST_REEL_DATA = [
+const FIRST_REEL_DATA = [
   CHERRY,
   LEMON,
   APPLE,
@@ -24,7 +16,7 @@ export const FIRST_REEL_DATA = [
   LEMON
 ];
 
-export const SECOND_REEL_DATA = [
+const SECOND_REEL_DATA = [
   LEMON,
   APPLE,
   LEMON,
@@ -35,7 +27,7 @@ export const SECOND_REEL_DATA = [
   LEMON
 ];
 
-export const THIRD_REEL_DATA = [
+const THIRD_REEL_DATA = [
   LEMON,
   APPLE,
   LEMON,
@@ -45,3 +37,5 @@ export const THIRD_REEL_DATA = [
   BANANA,
   LEMON
 ];
+
+export const REELS_DATA = [FIRST_REEL_DATA, SECOND_REEL_DATA, THIRD_REEL_DATA];
