@@ -135,7 +135,7 @@ class SlotMachineCard extends PureComponent {
         <CardBody>
           <Alert color={spinPrize ? "success" : "danger"} className="mb-0">
             {spinPrize
-              ? `Yeah. You get ${spinPrize} coins!`
+              ? `Yeah. You got ${spinPrize} coins!`
               : "Oh, sorry. Maybe next time!"}
           </Alert>
         </CardBody>
