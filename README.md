@@ -102,9 +102,6 @@ _The CRA project does not use CSS Modules or CSS-in-JS approach, only the .css i
 When we build with "npm/yarn build" command, a build folder is generated.
 In production, we only use the ./back_src, ./build and ./server.js files (plus .env and pkg.json).
 
-The integration has configured in heroku, and the link is:
-[https://bet-gaming.herokuapp.com](https://bet-gaming.herokuapp.com/)
-
 ---
 
 ### FRONT:
